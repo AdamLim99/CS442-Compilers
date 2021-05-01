@@ -1,0 +1,283 @@
+	.text	
+	.globl		main
+main:
+	li		$t0, 0
+	li		$t1, 1
+	la		$t2, x
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 1
+	li		$t1, 2
+	la		$t2, x
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 2
+	li		$t1, 3
+	la		$t2, x
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 3
+	li		$t1, 4
+	la		$t2, x
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 0
+	li		$t1, 5
+	la		$t2, y
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 1
+	li		$t1, 3
+	la		$t2, y
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 2
+	li		$t1, 3
+	la		$t2, y
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 3
+	li		$t1, 2
+	la		$t2, y
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 0
+	sw		$t0, i
+L3:	lw		$t0, i
+	li		$t1, 4
+	slt		$t2, $t0, $t1
+	beq		$zero, $t2, L4
+	lw		$t0, i
+	la		$t1, x
+	sll		$t0, $t0, 2
+	add		$t1, $t1, $t0
+	lw		$t1, 0($t1)
+	lw		$t0, i
+	la		$t3, y
+	sll		$t0, $t0, 2
+	add		$t3, $t3, $t0
+	lw		$t3, 0($t3)
+	seq		$t0, $t1, $t3
+	sw		$t0, z
+	lw		$t0, z
+	bne		$zero, $t0, L1
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L2
+L1:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L2:
+	lw		$t0, i
+	li		$t1, 1
+	add		$t3, $t0, $t1
+	sw		$t3, i
+	j		L3
+L4:
+	li		$t0, 2
+	addi		$t1, $zero, 0
+L5:	slt		$t2, $t1, $t0
+	beq		$t2, $zero, L6
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	addi		$t1, $t1, 1
+	j		L5
+L6:
+	li		$t0, 0
+	sw		$t0, i
+L9:	lw		$t0, i
+	li		$t1, 4
+	slt		$t2, $t0, $t1
+	beq		$zero, $t2, L10
+	lw		$t0, i
+	la		$t1, x
+	sll		$t0, $t0, 2
+	add		$t1, $t1, $t0
+	lw		$t1, 0($t1)
+	lw		$t0, i
+	la		$t3, y
+	sll		$t0, $t0, 2
+	add		$t3, $t3, $t0
+	lw		$t3, 0($t3)
+	sle		$t0, $t1, $t3
+	sw		$t0, z
+	lw		$t0, z
+	bne		$zero, $t0, L7
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L8
+L7:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L8:
+	lw		$t0, i
+	li		$t1, 1
+	add		$t3, $t0, $t1
+	sw		$t3, i
+	j		L9
+L10:
+	li		$t0, 2
+	addi		$t1, $zero, 0
+L11:	slt		$t2, $t1, $t0
+	beq		$t2, $zero, L12
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	addi		$t1, $t1, 1
+	j		L11
+L12:
+	li		$t0, 0
+	sw		$t0, i
+L15:	lw		$t0, i
+	li		$t1, 4
+	slt		$t2, $t0, $t1
+	beq		$zero, $t2, L16
+	lw		$t0, i
+	la		$t1, x
+	sll		$t0, $t0, 2
+	add		$t1, $t1, $t0
+	lw		$t1, 0($t1)
+	li		$t0, 3
+	sge		$t3, $t1, $t0
+	lw		$t0, i
+	la		$t1, y
+	sll		$t0, $t0, 2
+	add		$t1, $t1, $t0
+	lw		$t1, 0($t1)
+	li		$t0, 5
+	sle		$t4, $t1, $t0
+	and		$t0, $t3, $t4
+	sw		$t0, z
+	lw		$t0, z
+	bne		$zero, $t0, L13
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L14
+L13:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L14:
+	lw		$t0, i
+	li		$t1, 1
+	add		$t3, $t0, $t1
+	sw		$t3, i
+	j		L15
+L16:
+	li		$t0, 2
+	addi		$t1, $zero, 0
+L17:	slt		$t2, $t1, $t0
+	beq		$t2, $zero, L18
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	addi		$t1, $t1, 1
+	j		L17
+L18:
+	li		$t0, 0
+	sw		$t0, i
+L23:	lw		$t0, i
+	li		$t1, 4
+	slt		$t2, $t0, $t1
+	beq		$zero, $t2, L24
+	lw		$t0, i
+	la		$t1, x
+	sll		$t0, $t0, 2
+	add		$t1, $t1, $t0
+	lw		$t1, 0($t1)
+	li		$t0, 3
+	slt		$t3, $t0, $t1
+	lw		$t0, i
+	la		$t1, y
+	sll		$t0, $t0, 2
+	add		$t1, $t1, $t0
+	lw		$t1, 0($t1)
+	li		$t0, 5
+	sge		$t4, $t1, $t0
+	beq		$t4, $zero, L19
+	addi		$t4, $zero, 0
+	j		L20
+L19:	not		$t4, $t4
+L20:
+	or		$t0, $t3, $t4
+	sw		$t0, z
+	lw		$t0, z
+	bne		$zero, $t0, L21
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L22
+L21:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L22:
+	lw		$t0, i
+	li		$t1, 1
+	add		$t3, $t0, $t1
+	sw		$t3, i
+	j		L23
+L24:
+	li		$t0, 1
+	addi		$t1, $zero, 0
+L25:	slt		$t2, $t1, $t0
+	beq		$t2, $zero, L26
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	addi		$t1, $t1, 1
+	j		L25
+L26:
+	li		$v0, 10
+	syscall	
+	.data	
+_nl:	.asciiz		"\n"
+	.align		2
+space:	.asciiz		" "
+	.align		2
+true:	.asciiz		"true"
+	.align		2
+false:	.asciiz		"false"
+	.align		2
+i:	.word		0
+x:	.space		16
+y:	.space		16
+z:	.word		0

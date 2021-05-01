@@ -1,0 +1,18 @@
+int num1;
+int num2;
+num1 = 1;
+num2 = 1;
+num1 = -num1--num2;
+num2 = 2 ^ 3;
+print num1;
+print num2;
+printlines(1);
+num1 = 1*2+(5-3)/1;
+num2 = 2%2;
+print num1;
+print num2;
+printlines(1);
+num1 = 6 && 9;
+num2 = 9 || 6;
+print num1;
+print num2;

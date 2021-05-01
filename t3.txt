@@ -1,0 +1,150 @@
+	.text	
+	.globl		main
+main:
+	lw		$t0, i
+	li		$v0, 5
+	syscall	
+	sw		$v0, i
+	lw		$t1, j
+	li		$v0, 5
+	syscall	
+	sw		$v0, j
+	lw		$t2, k
+	li		$v0, 5
+	syscall	
+	sw		$v0, k
+	lw		$t3, m
+	li		$v0, 5
+	syscall	
+	sw		$v0, m
+	lw		$t3, i
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, j
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, k
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, m
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, i
+	lw		$t4, j
+	addi		$t5, $zero, 0
+	addi		$t7, $zero, 1
+L1:	slt		$t6, $t5, $t4
+	beq		$t6, $zero, L2
+	mul		$t7, $t7, $t3
+	addi		$t5, $t5, 1
+	j		L1
+L2:
+	lw		$t3, k
+	mul		$t4, $t7, $t3
+	lw		$t3, m
+	add		$t5, $t4, $t3
+	li		$v0, 1
+	move		$a0, $t5
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, m
+	lw		$t4, k
+	lw		$t5, i
+	lw		$t6, j
+	addi		$t7, $zero, 0
+	addi		$t9, $zero, 1
+L3:	slt		$t8, $t7, $t6
+	beq		$t8, $zero, L4
+	mul		$t9, $t9, $t5
+	addi		$t7, $t7, 1
+	j		L3
+L4:
+	mul		$t5, $t4, $t9
+	add		$t4, $t3, $t5
+	li		$v0, 1
+	move		$a0, $t4
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	li		$t3, 8
+	addi		$t4, $zero, 0
+L5:	slt		$t5, $t4, $t3
+	beq		$t5, $zero, L6
+	li		$v0, 4
+	la		$a0, space
+	syscall	
+	addi		$t4, $t4, 1
+	j		L5
+L6:
+	lw		$t3, i
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, j
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, k
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, m
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	li		$t3, 1
+	addi		$t4, $zero, 0
+L7:	slt		$t5, $t4, $t3
+	beq		$t5, $zero, L8
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	addi		$t4, $t4, 1
+	j		L7
+L8:
+	li		$v0, 10
+	syscall	
+	.data	
+_nl:	.asciiz		"\n"
+	.align		2
+space:	.asciiz		" "
+	.align		2
+true:	.asciiz		"true"
+	.align		2
+false:	.asciiz		"false"
+	.align		2
+i:	.word		0
+j:	.word		0
+k:	.word		0
+m:	.word		0

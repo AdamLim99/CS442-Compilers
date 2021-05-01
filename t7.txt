@@ -1,0 +1,138 @@
+	.text	
+	.globl		main
+main:
+	lw		$t0, count
+	li		$v0, 5
+	syscall	
+	sw		$v0, count
+L8:	lw		$t0, count
+	li		$t1, 0
+	slt		$t2, $t1, $t0
+	beq		$zero, $t2, L9
+	lw		$t0, low
+	li		$v0, 5
+	syscall	
+	sw		$v0, low
+	lw		$t1, mid
+	li		$v0, 5
+	syscall	
+	sw		$v0, mid
+	lw		$t3, high
+	li		$v0, 5
+	syscall	
+	sw		$v0, high
+	lw		$t3, low
+	lw		$t4, mid
+	slt		$t5, $t3, $t4
+	lw		$t3, mid
+	lw		$t4, high
+	slt		$t6, $t4, $t3
+	and		$t3, $t5, $t6
+	beq		$zero, $t3, L6
+	lw		$t4, mid
+	sw		$t4, temp
+	lw		$t4, high
+	sw		$t4, mid
+	lw		$t4, temp
+	sw		$t4, high
+	lw		$t4, low
+	lw		$t5, mid
+	slt		$t6, $t5, $t4
+	beq		$zero, $t6, L1
+	lw		$t4, low
+	sw		$t4, temp
+	lw		$t4, mid
+	sw		$t4, low
+	lw		$t4, temp
+	sw		$t4, mid
+L1:
+	j		L7
+L6:
+	lw		$t4, low
+	lw		$t5, mid
+	slt		$t6, $t5, $t4
+	lw		$t4, mid
+	lw		$t5, high
+	slt		$t7, $t4, $t5
+	and		$t4, $t6, $t7
+	beq		$zero, $t4, L4
+	lw		$t5, low
+	sw		$t5, temp
+	lw		$t5, mid
+	sw		$t5, low
+	lw		$t5, temp
+	sw		$t5, mid
+	lw		$t5, mid
+	lw		$t6, high
+	slt		$t7, $t6, $t5
+	beq		$zero, $t7, L2
+	lw		$t5, mid
+	sw		$t5, temp
+	lw		$t5, high
+	sw		$t5, mid
+	lw		$t5, temp
+	sw		$t5, high
+L2:
+	j		L5
+L4:
+	lw		$t5, low
+	lw		$t6, mid
+	slt		$t7, $t6, $t5
+	lw		$t5, mid
+	lw		$t6, high
+	slt		$t8, $t6, $t5
+	and		$t5, $t7, $t8
+	beq		$zero, $t5, L3
+	lw		$t6, low
+	sw		$t6, temp
+	lw		$t6, high
+	sw		$t6, low
+	lw		$t6, temp
+	sw		$t6, high
+L3:
+L5:
+L7:
+	lw		$t3, low
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, mid
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, high
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, count
+	li		$t4, 1
+	sub		$t5, $t3, $t4
+	sw		$t5, count
+	j		L8
+L9:
+	li		$v0, 10
+	syscall	
+	.data	
+_nl:	.asciiz		"\n"
+	.align		2
+_s1:	.asciiz		" "
+	.align		2
+true:	.asciiz		"true"
+	.align		2
+false:	.asciiz		"false"
+	.align		2
+high:	.word		0
+test:	.word		0
+low:	.word		0
+temp:	.word		0
+mid:	.word		0
+count:	.word		0

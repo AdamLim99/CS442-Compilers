@@ -1,0 +1,43 @@
+	.text	
+	.globl		main
+main:
+	li		$t0, 0
+	sw		$t0, temp
+	jal		a
+	lw		$t0, temp
+	li		$v0, 1
+	move		$a0, $t0
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	li		$v0, 10
+	syscall	
+a:
+	sw		$ra, ($sp)
+	lw		$t0, temp
+	li		$t1, 1
+	add		$t2, $t0, $t1
+	sw		$t2, temp
+	li		$t0, 1
+	li		$t1, 1
+	add		$t2, $t0, $t1
+	li		$v0, 1
+	move		$a0, $t2
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$ra, ($sp)
+	jr		$ra
+	.data	
+_nl:	.asciiz		"\n"
+	.align		2
+space:	.asciiz		" "
+	.align		2
+true:	.asciiz		"true"
+	.align		2
+false:	.asciiz		"false"
+	.align		2
+temp:	.word		0
+temp2:	.word		0

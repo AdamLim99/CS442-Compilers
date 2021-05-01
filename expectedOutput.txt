@@ -1,0 +1,133 @@
+File: testIntExpr
+Output: 
+0
+8
+
+4
+0
+
+0
+15
+
+
+File: testIntIO
+Output: 2 0 9
+
+
+File: testControl
+Output:
+5
+1
+
+
+File: testArray
+Output:
+1
+1
+2
+3
+8
+3
+
+
+File: testArray2
+Output:
+0
+1
+2
+3
+4
+5
+
+0
+1
+2
+3
+4
+5
+
+
+1
+
+
+File: testArrayGend1
+Output:
+5072
+72
+500
+
+
+File: testArrayGend2
+Output:
+1
+16
+55
+66
+69
+168
+420
+696
+888
+999
+
+
+File: testBool
+Output:
+true
+false
+
+false
+true
+true
+
+false (Depending on input. 1 = true, 0 = false)
+
+
+File: testBool2
+Output:
+false
+true
+false
+true
+false
+true
+
+true
+false
+true
+false
+true
+false
+
+
+File: testFunc
+Output:
+2
+1
+
+
+File: testFunc2
+Output:
+3
+1
+2
+9
+
+
+File: testFunc3
+Output:
+true
+69
+false
+true
+false
+
+
+File: testFunc4
+Output:
+6
+false
+3
+true
+false
+0

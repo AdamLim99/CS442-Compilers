@@ -1,0 +1,163 @@
+	.text	
+	.globl		main
+main:
+	lw		$t0, a
+	addi		$t0, $zero, 1
+	sw		$t0, a
+	lw		$t0, b
+	addi		$t0, $zero, 0
+	sw		$t0, b
+	lw		$t0, a
+	bne		$zero, $t0, L1
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L2
+L1:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L2:
+	lw		$t0, b
+	bne		$zero, $t0, L3
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L4
+L3:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L4:
+	li		$t0, 1
+	addi		$t1, $zero, 0
+L5:	slt		$t2, $t1, $t0
+	beq		$t2, $zero, L6
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	addi		$t1, $t1, 1
+	j		L5
+L6:
+	lw		$t0, a
+	lw		$t1, b
+	and		$t2, $t0, $t1
+	sw		$t2, a
+	lw		$t0, a
+	bne		$zero, $t0, L7
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L8
+L7:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L8:
+	lw		$t0, a
+	bne		$t0, $zero, L9
+	addi		$t0, $zero, 0
+	j		L10
+L9:	not		$t0, $t0
+L10:
+	sw		$t0, a
+	lw		$t0, a
+	bne		$zero, $t0, L11
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L12
+L11:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L12:
+	lw		$t0, a
+	lw		$t1, b
+	or		$t2, $t0, $t1
+	sw		$t2, a
+	lw		$t0, a
+	bne		$zero, $t0, L13
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L14
+L13:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L14:
+	li		$t0, 1
+	addi		$t1, $zero, 0
+L15:	slt		$t2, $t1, $t0
+	beq		$t2, $zero, L16
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	addi		$t1, $t1, 1
+	j		L15
+L16:
+	lw		$t0, a
+	li		$v0, 5
+	syscall	
+	sw		$v0, a
+	lw		$t0, a
+	bne		$zero, $t0, L17
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L18
+L17:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L18:
+	li		$v0, 10
+	syscall	
+	.data	
+_nl:	.asciiz		"\n"
+	.align		2
+space:	.asciiz		" "
+	.align		2
+true:	.asciiz		"true"
+	.align		2
+false:	.asciiz		"false"
+	.align		2
+a:	.word		0
+b:	.word		0

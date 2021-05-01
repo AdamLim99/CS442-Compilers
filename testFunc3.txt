@@ -1,0 +1,131 @@
+	.text	
+	.globl		main
+main:
+	subu		$sp, $sp, 8
+	sw		$t0, 4($sp)
+	sw		$t2, 8($sp)
+	jal		func
+	lw		$t0, 4($sp)
+	lw		$t2, 8($sp)
+	addu		$sp, $sp, 8
+	move		$t0, $v0
+	bne		$zero, $t0, L1
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L2
+L1:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L2:
+	lw		$t0, c
+	li		$v0, 1
+	move		$a0, $t0
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t0, a
+	bne		$zero, $t0, L3
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L4
+L3:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L4:
+	lw		$t0, b
+	bne		$zero, $t0, L5
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L6
+L5:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L6:
+	subu		$sp, $sp, 8
+	sw		$t0, 4($sp)
+	sw		$t2, 8($sp)
+	jal		func
+	lw		$t0, 4($sp)
+	lw		$t2, 8($sp)
+	addu		$sp, $sp, 8
+	move		$t0, $v0
+	beq		$t0, $zero, L7
+	addi		$t0, $zero, 0
+	j		L8
+L7:	not		$t0, $t0
+L8:
+	bne		$zero, $t0, L9
+	li		$v0, 4
+	la		$a0, false
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	j		L10
+L9:
+	li		$v0, 4
+	la		$a0, true
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+L10:
+	li		$v0, 10
+	syscall	
+func:
+	subu		$sp, $sp, 4
+	sw		$t2, 4($sp)
+	sw		$ra, ($sp)
+	li		$t0, 69
+	sw		$t0, c
+	lw		$t0, a
+	addi		$t0, $zero, 0
+	sw		$t0, a
+	lw		$t0, b
+	addi		$t0, $zero, 1
+	sw		$t0, b
+	lw		$t0, a
+	lw		$t1, b
+	or		$t2, $t0, $t1
+	move		$v0, $t2
+	lw		$ra, ($sp)
+	lw		$t2, 4($sp)
+	addu		$sp, $sp, 4
+	jr		$ra
+	.data	
+_nl:	.asciiz		"\n"
+	.align		2
+space:	.asciiz		" "
+	.align		2
+true:	.asciiz		"true"
+	.align		2
+false:	.asciiz		"false"
+	.align		2
+c:	.word		0
+a:	.word		0
+b:	.word		0

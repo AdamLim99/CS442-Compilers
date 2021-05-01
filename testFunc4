@@ -1,0 +1,25 @@
+int intArr[3];
+bool boolArr[6];
+void a () {
+  intArr[0]=6;
+  boolArr[1]=false;
+}
+int b () {
+  intArr[1]=intArr[0]/2;
+  boolArr[1-1]=!boolArr[1];
+  return intArr[1];
+}
+bool c () {
+  intArr[2]=69%3;
+  boolArr[2]=true;
+  boolArr[3]=true;
+  boolArr[4]=boolArr[2] && boolArr[3];
+  return !boolArr[4];
+}
+a();
+print intArr[0];
+printBool boolArr[1];
+print b();
+printBool boolArr[0];
+printBool c();
+print intArr[2];

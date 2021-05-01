@@ -1,0 +1,99 @@
+	.text	
+	.globl		main
+main:
+	lw		$t0, count
+	li		$v0, 5
+	syscall	
+	sw		$v0, count
+L4:	lw		$t1, count
+	li		$t2, 0
+	slt		$t3, $t2, $t1
+	beq		$zero, $t3, L5
+	lw		$t1, low
+	li		$v0, 5
+	syscall	
+	sw		$v0, low
+	lw		$t2, mid
+	li		$v0, 5
+	syscall	
+	sw		$v0, mid
+	lw		$t4, high
+	li		$v0, 5
+	syscall	
+	sw		$v0, high
+	lw		$t5, low
+	lw		$t6, mid
+	slt		$t7, $t6, $t5
+	beq		$zero, $t7, L1
+	lw		$t5, low
+	sw		$t5, temp
+	lw		$t5, mid
+	sw		$t5, low
+	lw		$t5, temp
+	sw		$t5, mid
+L1:
+	lw		$t5, low
+	lw		$t6, high
+	slt		$t7, $t6, $t5
+	beq		$zero, $t7, L2
+	lw		$t5, low
+	sw		$t5, temp
+	lw		$t5, high
+	sw		$t5, low
+	lw		$t5, temp
+	sw		$t5, high
+L2:
+	lw		$t5, mid
+	lw		$t6, high
+	slt		$t7, $t6, $t5
+	beq		$zero, $t7, L3
+	lw		$t5, mid
+	sw		$t5, temp
+	lw		$t5, high
+	sw		$t5, mid
+	lw		$t5, temp
+	sw		$t5, high
+L3:
+	lw		$t5, low
+	li		$v0, 1
+	move		$a0, $t5
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t5, mid
+	li		$v0, 1
+	move		$a0, $t5
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t5, high
+	li		$v0, 1
+	move		$a0, $t5
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t5, count
+	li		$t6, 1
+	sub		$t7, $t5, $t6
+	sw		$t7, count
+	j		L4
+L5:
+	li		$v0, 10
+	syscall	
+	.data	
+_nl:	.asciiz		"\n"
+	.align		2
+_s1:	.asciiz		" "
+	.align		2
+true:	.asciiz		"true"
+	.align		2
+false:	.asciiz		"false"
+	.align		2
+high:	.word		0
+low:	.word		0
+temp:	.word		0
+mid:	.word		0
+count:	.word		0

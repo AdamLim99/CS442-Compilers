@@ -1,0 +1,14 @@
+bool a;
+bool b;
+int c;
+bool func(){
+  c = 69;
+  a = false;
+  b = true;
+  return a || b;
+}
+printBool func();
+print c;
+printBool a;
+printBool b;
+printBool !func();

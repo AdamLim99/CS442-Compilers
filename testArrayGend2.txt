@@ -1,0 +1,170 @@
+	.text	
+	.globl		main
+main:
+	li		$t0, 0
+	li		$t1, 999
+	la		$t2, num3
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 1
+	li		$t1, 888
+	la		$t2, num3
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 2
+	li		$t1, 16
+	la		$t2, num3
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 3
+	li		$t1, 420
+	la		$t2, num3
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 4
+	li		$t1, 66
+	la		$t2, num3
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 5
+	li		$t1, 69
+	la		$t2, num3
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 6
+	li		$t1, 696
+	la		$t2, num3
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 7
+	li		$t1, 168
+	la		$t2, num3
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 8
+	li		$t1, 1
+	la		$t2, num3
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 9
+	li		$t1, 55
+	la		$t2, num3
+	sll		$t0, $t0, 2
+	add		$t2, $t2, $t0
+	sw		$t1, 0($t2)
+	li		$t0, 0
+	sw		$t0, i
+L4:	lw		$t0, i
+	li		$t1, 10
+	slt		$t2, $t0, $t1
+	beq		$zero, $t2, L5
+	li		$t0, 0
+	sw		$t0, j
+L2:	lw		$t0, j
+	li		$t1, 10
+	li		$t3, 1
+	sub		$t4, $t1, $t3
+	lw		$t1, i
+	sub		$t3, $t4, $t1
+	slt		$t1, $t0, $t3
+	beq		$zero, $t1, L3
+	lw		$t0, j
+	la		$t3, num3
+	sll		$t0, $t0, 2
+	add		$t3, $t3, $t0
+	lw		$t3, 0($t3)
+	lw		$t0, j
+	li		$t4, 1
+	add		$t5, $t0, $t4
+	la		$t0, num3
+	sll		$t5, $t5, 2
+	add		$t0, $t0, $t5
+	lw		$t0, 0($t0)
+	slt		$t4, $t0, $t3
+	beq		$zero, $t4, L1
+	lw		$t0, j
+	la		$t3, num3
+	sll		$t0, $t0, 2
+	add		$t3, $t3, $t0
+	lw		$t3, 0($t3)
+	sw		$t3, temp
+	lw		$t0, j
+	lw		$t3, j
+	li		$t5, 1
+	add		$t6, $t3, $t5
+	la		$t3, num3
+	sll		$t6, $t6, 2
+	add		$t3, $t3, $t6
+	lw		$t3, 0($t3)
+	la		$t5, num3
+	sll		$t0, $t0, 2
+	add		$t5, $t5, $t0
+	sw		$t3, 0($t5)
+	lw		$t0, j
+	li		$t3, 1
+	add		$t5, $t0, $t3
+	lw		$t0, temp
+	la		$t3, num3
+	sll		$t5, $t5, 2
+	add		$t3, $t3, $t5
+	sw		$t0, 0($t3)
+L1:
+	lw		$t0, j
+	li		$t3, 1
+	add		$t4, $t0, $t3
+	sw		$t4, j
+	j		L2
+L3:
+	lw		$t0, i
+	li		$t1, 1
+	add		$t3, $t0, $t1
+	sw		$t3, i
+	j		L4
+L5:
+	li		$t0, 0
+	sw		$t0, i
+L6:	lw		$t0, i
+	li		$t1, 10
+	slt		$t2, $t0, $t1
+	beq		$zero, $t2, L7
+	lw		$t0, i
+	la		$t1, num3
+	sll		$t0, $t0, 2
+	add		$t1, $t1, $t0
+	lw		$t1, 0($t1)
+	li		$v0, 1
+	move		$a0, $t1
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t0, i
+	li		$t1, 1
+	add		$t3, $t0, $t1
+	sw		$t3, i
+	j		L6
+L7:
+	li		$v0, 10
+	syscall	
+	.data	
+_nl:	.asciiz		"\n"
+	.align		2
+space:	.asciiz		" "
+	.align		2
+true:	.asciiz		"true"
+	.align		2
+false:	.asciiz		"false"
+	.align		2
+i:	.word		0
+j:	.word		0
+temp:	.word		0
+num3:	.space		40

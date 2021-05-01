@@ -1,0 +1,90 @@
+	.text	
+	.globl		main
+main:
+	li		$t0, 3
+	sw		$t0, i
+	li		$t0, 8
+	sw		$t0, j
+	li		$t0, 2
+	sw		$t0, k
+	lw		$t0, i
+	lw		$t1, j
+	lw		$t2, k
+	mul		$t3, $t1, $t2
+	add		$t1, $t0, $t3
+	sw		$t1, m
+	lw		$t0, m
+	li		$v0, 1
+	move		$a0, $t0
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t0, j
+	lw		$t1, i
+	div		$t2, $t0, $t1
+	lw		$t0, k
+	add		$t1, $t2, $t0
+	sw		$t1, m
+	lw		$t0, m
+	li		$v0, 1
+	move		$a0, $t0
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t0, k
+	lw		$t1, j
+	mul		$t2, $t0, $t1
+	lw		$t0, i
+	rem		$t1, $t2, $t0
+	sw		$t1, m
+	lw		$t0, m
+	li		$v0, 1
+	move		$a0, $t0
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t0, j
+	lw		$t1, k
+	addi		$t2, $zero, 0
+	addi		$t4, $zero, 1
+L1:	slt		$t3, $t2, $t1
+	beq		$t3, $zero, L2
+	mul		$t4, $t4, $t0
+	addi		$t2, $t2, 1
+	j		L1
+L2:
+	lw		$t0, i
+	addi		$t1, $zero, 0
+	addi		$t3, $zero, 1
+L3:	slt		$t2, $t1, $t0
+	beq		$t2, $zero, L4
+	mul		$t3, $t3, $t4
+	addi		$t1, $t1, 1
+	j		L3
+L4:
+	sw		$t3, m
+	lw		$t0, m
+	li		$v0, 1
+	move		$a0, $t0
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	li		$v0, 10
+	syscall	
+	.data	
+_nl:	.asciiz		"\n"
+	.align		2
+_s1:	.asciiz		" "
+	.align		2
+true:	.asciiz		"true"
+	.align		2
+false:	.asciiz		"false"
+	.align		2
+i:	.word		0
+j:	.word		0
+k:	.word		0
+m:	.word		0

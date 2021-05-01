@@ -1,0 +1,18 @@
+bool x;
+bool y;
+bool z;
+    
+x = true;
+y = false;
+z = x && y;
+printBool z;
+z = x || y;
+printBool z;
+z = !x;
+printBool z;
+z = !(x && y);
+printBool z;
+z = !x || !y;
+printBool z;
+z = !!x;
+printBool z;

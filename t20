@@ -1,0 +1,32 @@
+bool x[4];
+bool y[4];
+int i;
+x[0]=true;
+x[1]=true;
+x[2]=false;
+x[3]=false;
+y[0]=true;
+y[1]=false;
+y[2]=true;
+y[3]=false;
+
+for (i = 0; i < 4; i=i+1;) {
+    printBool x[i];
+    printBool y[i];
+    printBool x[i] && y[i];
+    printlines(1);
+}
+printlines(1);
+for (i = 0; i < 4; i=i+1;) {
+    printBool x[i];
+    printBool y[i];
+    printBool x[i] || y[i];
+    printlines(1);
+}
+printlines(1);
+for (i = 0; i < 4; i=i+1;) {
+     printBool x[i];
+     printBool y[i];
+     printBool !(x[i] && !y[i]);
+     printlines(1);
+}

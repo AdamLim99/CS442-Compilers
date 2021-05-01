@@ -1,0 +1,81 @@
+	.text	
+	.globl		main
+main:
+	lw		$t0, start
+	li		$v0, 5
+	syscall	
+	sw		$v0, start
+	lw		$t1, end
+	li		$v0, 5
+	syscall	
+	sw		$v0, end
+	lw		$t2, inc
+	li		$v0, 5
+	syscall	
+	sw		$v0, inc
+	lw		$t3, start
+	sw		$t3, current
+L1:	lw		$t3, current
+	lw		$t4, end
+	sle		$t5, $t3, $t4
+	beq		$zero, $t5, L2
+	lw		$t3, current
+	li		$t4, 32
+	sub		$t6, $t3, $t4
+	li		$t3, 5
+	mul		$t4, $t6, $t3
+	li		$t3, 9
+	div		$t6, $t4, $t3
+	sw		$t6, c
+	lw		$t3, current
+	li		$t4, 460
+	add		$t6, $t3, $t4
+	li		$t3, 5
+	mul		$t4, $t6, $t3
+	li		$t3, 9
+	div		$t6, $t4, $t3
+	sw		$t6, k
+	lw		$t3, current
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, c
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, k
+	li		$v0, 1
+	move		$a0, $t3
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, current
+	lw		$t4, inc
+	add		$t6, $t3, $t4
+	sw		$t6, current
+	j		L1
+L2:
+	li		$v0, 10
+	syscall	
+	.data	
+_nl:	.asciiz		"\n"
+	.align		2
+_s1:	.asciiz		" "
+	.align		2
+true:	.asciiz		"true"
+	.align		2
+false:	.asciiz		"false"
+	.align		2
+c:	.word		0
+inc:	.word		0
+k:	.word		0
+end:	.word		0
+current:	.word		0
+start:	.word		0

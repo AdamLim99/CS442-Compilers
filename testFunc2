@@ -1,0 +1,13 @@
+int a;
+int b;
+int c;
+int func(){
+  a = 1;
+  b = 2;
+  return a+b;
+}
+print func();
+print a;
+print b;
+c = func()^2;
+print c;

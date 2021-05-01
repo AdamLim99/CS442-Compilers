@@ -1,0 +1,30 @@
+int i;
+int j;
+int temp;
+int num3[10];
+num3[0]= 999;
+num3[1]= 888;
+num3[2]= 16;
+num3[3]= 420;
+num3[4]= 66;
+num3[5]= 69;
+num3[6]= 696;
+num3[7]= 168;
+num3[8]= 1;
+num3[9]= 55;
+i=0;
+while ( i < 10) {
+  j = 0;
+  while (j < 10-1-i) {
+    if (num3[j] > num3[j+1]) {
+      temp = num3[j];
+      num3[j] = num3[j+1];
+      num3[j+1] = temp;
+    }
+    j= j+1;
+  }
+  i = i+1;
+}
+for(i=0;i<10;i=i+1;){
+  print num3[i];
+}

@@ -1,0 +1,153 @@
+	.text	
+	.globl		main
+main:
+	lw		$t0, count
+	li		$v0, 5
+	syscall	
+	sw		$v0, count
+	li		$t1, 0
+	sw		$t1, i
+L1:	lw		$t1, i
+	lw		$t2, count
+	slt		$t3, $t1, $t2
+	beq		$zero, $t3, L2
+	lw		$t1, i
+	la		$t2, numbers
+	sll		$t1, $t1, 2
+	add		$t2, $t2, $t1
+	li		$v0, 5
+	syscall	
+	sw		$v0, 0($t2)
+	lw		$t4, i
+	li		$t5, 1
+	add		$t6, $t4, $t5
+	sw		$t6, i
+	j		L1
+L2:
+	li		$t3, 0
+	sw		$t3, p
+L6:	lw		$t3, p
+	lw		$t4, count
+	li		$t5, 1
+	sub		$t6, $t4, $t5
+	slt		$t4, $t3, $t6
+	beq		$zero, $t4, L7
+	lw		$t3, p
+	sw		$t3, s
+	lw		$t3, p
+	li		$t5, 1
+	add		$t6, $t3, $t5
+	sw		$t6, i
+L4:	lw		$t3, i
+	lw		$t5, count
+	slt		$t6, $t3, $t5
+	beq		$zero, $t6, L5
+	lw		$t3, i
+	la		$t5, numbers
+	sll		$t3, $t3, 2
+	add		$t5, $t5, $t3
+	lw		$t5, 0($t5)
+	lw		$t3, s
+	la		$t7, numbers
+	sll		$t3, $t3, 2
+	add		$t7, $t7, $t3
+	lw		$t7, 0($t7)
+	slt		$t3, $t5, $t7
+	beq		$zero, $t3, L3
+	lw		$t5, i
+	sw		$t5, s
+L3:
+	lw		$t3, i
+	li		$t5, 1
+	add		$t7, $t3, $t5
+	sw		$t7, i
+	j		L4
+L5:
+	lw		$t3, p
+	la		$t5, numbers
+	sll		$t3, $t3, 2
+	add		$t5, $t5, $t3
+	lw		$t5, 0($t5)
+	sw		$t5, temp
+	lw		$t3, p
+	lw		$t5, s
+	la		$t6, numbers
+	sll		$t5, $t5, 2
+	add		$t6, $t6, $t5
+	lw		$t6, 0($t6)
+	la		$t5, numbers
+	sll		$t3, $t3, 2
+	add		$t5, $t5, $t3
+	sw		$t6, 0($t5)
+	lw		$t3, s
+	lw		$t5, temp
+	la		$t6, numbers
+	sll		$t3, $t3, 2
+	add		$t6, $t6, $t3
+	sw		$t5, 0($t6)
+	lw		$t3, p
+	li		$t5, 1
+	add		$t6, $t3, $t5
+	sw		$t6, p
+	j		L6
+L7:
+	li		$t3, 2
+	addi		$t4, $zero, 0
+L8:	slt		$t5, $t4, $t3
+	beq		$t5, $zero, L9
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	addi		$t4, $t4, 1
+	j		L8
+L9:
+	li		$t3, 0
+	sw		$t3, i
+L10:	lw		$t3, i
+	lw		$t4, count
+	slt		$t5, $t3, $t4
+	beq		$zero, $t5, L11
+	lw		$t3, i
+	la		$t4, numbers
+	sll		$t3, $t3, 2
+	add		$t4, $t4, $t3
+	lw		$t4, 0($t4)
+	li		$v0, 1
+	move		$a0, $t4
+	syscall	
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	lw		$t3, i
+	li		$t4, 1
+	add		$t6, $t3, $t4
+	sw		$t6, i
+	j		L10
+L11:
+	li		$t3, 1
+	addi		$t4, $zero, 0
+L12:	slt		$t5, $t4, $t3
+	beq		$t5, $zero, L13
+	li		$v0, 4
+	la		$a0, _nl
+	syscall	
+	addi		$t4, $t4, 1
+	j		L12
+L13:
+	li		$v0, 10
+	syscall	
+	.data	
+_nl:	.asciiz		"\n"
+	.align		2
+_s1:	.asciiz		" "
+	.align		2
+true:	.asciiz		"true"
+	.align		2
+false:	.asciiz		"false"
+	.align		2
+i:	.word		0
+p:	.word		0
+s:	.word		0
+numbers:	.space		120
+temp:	.word		0
+count:	.word		0

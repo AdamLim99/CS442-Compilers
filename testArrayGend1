@@ -1,0 +1,12 @@
+int num1;
+int num2;
+int i;
+int num3[11];
+num1 = 10 + 2;
+num2 = 20 * 3 + num1;
+i = 7;
+num3[i] = 500;
+num1 = num2 + num3[i] * 10;
+print num1;
+print num2;
+print num3[i];
